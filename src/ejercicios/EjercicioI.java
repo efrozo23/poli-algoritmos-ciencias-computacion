@@ -34,8 +34,8 @@ public class EjercicioI {
 		BigInteger sum = new BigInteger("0");
 		double v = 0;
 		for (int i = j; i <= nMax; i++) {
-			for (int k = i; k <= 0 ; i--) {
-				v += tabla.get(k).doubleValue();
+			for (int k = i; k > 0 ; k--) {
+				v += tabla.get(k-1).doubleValue();
 				sum.add(tabla.get(k).toBigInteger());
 				System.out.println("Valor v" + v);
 				System.out.println("Valor big" + sum);
