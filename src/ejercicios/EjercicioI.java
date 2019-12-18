@@ -15,7 +15,7 @@ public class EjercicioI {
 				String n = reader.readLine();
 				if (n == null || n.isEmpty())
 					break;
-				String r = fibonacci(n,2);
+				String r = fibonacci(n, 2);
 				System.out.println("Valor final");
 				System.out.println("--->" + r);
 			}
@@ -31,21 +31,31 @@ public class EjercicioI {
 		ArrayList<BigDecimal> tabla = new ArrayList<>();
 		tabla.add(BigDecimal.ZERO);
 		tabla.add(BigDecimal.ONE);
+		tabla.add(BigDecimal.ONE);
 		BigInteger sum = new BigInteger("0");
 		double v = 0;
-		for (int i = j; i <= nMax; i++) {
-			for (int k = i; k > 0 ; k--) {
-				v += tabla.get(k-1).doubleValue();
-				sum.add(tabla.get(k).toBigInteger());
-				System.out.println("Valor v" + v);
-				System.out.println("Valor big" + sum);
+
+		int pivot = j;
+		int x = 0;
+		int[] a = new int[Integer.valueOf(n) + 1];
+		a[0] = 0;
+		a[1] = 1;
+		for (int i = 1; i <= nMax; i++) {
+			for (int k = 0; k <= j; k++) {
+				if ((i - k) < 0) {
+					break;
+				}
+				x += a[i - k];
 			}
-			tabla.add(i, new BigDecimal(v));
-			sum = new BigInteger("0");
-			v = 0;
+			a[i] = (x % 1000000009);
+			x = 0;
 		}
-		tabla.forEach(System.out::print);
-		return tabla.get((int) nMax).toString();
+		for (int i = 1; i < a.length; i++) {
+			System.out.println("Valor ok: " + a[i]);
+
+		}
+
+		return "" + a[Integer.valueOf(n)];
 	}
 
 }
