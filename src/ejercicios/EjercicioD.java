@@ -74,13 +74,13 @@ public class EjercicioD {
 	private static void startcourse(int x, int y) {
 		try {
 			// 0 = N | 1 = E | 2 = O  | S = 3
-			int dir = 1;
+			int dir = 0;
 //			!isfinal(wordl.length - x, y - 1)
+			int i = wordl.length - y;
+			int j = x - 1;
 			while (true) {
-				int i = wordl.length - x;
-				int j = y - 1;
-				int auxX = x;
-				int auxY = y;
+				int auxX = i;
+				int auxY = j;
 				
 				/*
 				System.out.println("pos i -j :" + i + "-" + j);
@@ -89,7 +89,7 @@ public class EjercicioD {
 				System.out.println("Pos final " + posFinal[0] + "-" + posFinal[1]);
 				
 				*/
-				if(isfinal(i, j) && dir == 0) {
+				if(isfinal(i, j)) {
 					break;
 				}
 				
@@ -97,68 +97,66 @@ public class EjercicioD {
 				if (dir == 0 && wordl[i][j] == 1) {
 					wordl[i][j] = 0;
 					dir = 1;
-					if (isfinal(i, j + 1) && dir == 0)
+					if (isfinal(i, j + 1))
 						break;
-					y = auxY + 1;
+					j = auxY + 1;
 				}
 //				Inicia viendo al norte y se mueve a la izquierda
 				else if (dir == 0 && wordl[i][j] == 0) {
 					wordl[i][j] = 1;
-					if (isfinal(i, j - 1) && dir == 0)
+					if (isfinal(i, j - 1))
 						break;
-					y = auxY - 1;
+					j = auxY - 1;
 					dir = 2;
 				}
 //				Inicia viendo al este y se mueve a la derecha
 				else if (dir == 1 && wordl[i][j] == 1) {
 					wordl[i][j] = 0;
-					if (isfinal(i + 1, j) && dir == 0)
+					if (isfinal(i + 1, j))
 						break;
-					x = auxX - 1;
+					i = auxX + 1;
 					dir = 3;
 				}
 //				Inicia viendo al este y se mueve a la izquierda
 				else if (dir == 1 && wordl[i][j] == 0) {
 					wordl[i][j] = 1;
-					if (isfinal(i - 1, j) && dir == 0)
+					if (isfinal(i - 1, j))
 						break;
-					x = auxX + 1;
+					i = auxX - 1;
 					dir = 0;
 				}
 //				Inicia viendo al oeste y se mueve a la derecha
 				else if (dir == 2 && wordl[i][j] == 1) {
 					wordl[i][j] = 0;
-					if (isfinal(i - 1, j) && dir == 0)
+					if (isfinal(i - 1, j))
 						break;
-					x = auxX + 1;
+					i = auxX - 1;
 					dir = 0;
 				}
 //				Inicia viendo al oeste y se mueve a la izquierda
 				else if (dir == 2 && wordl[i][j] == 0) {
 					wordl[i][j] = 1;
-					if (isfinal(i + 1, j) && dir == 0)
+					if (isfinal(i + 1, j))
 						break;
-					x = auxX - 1;
+					i = auxX + 1;
 					dir = 3;
 				}
 //				Inicia viendo al sur y se mueve a la derecha
 				else if (dir == 3 && wordl[i][j] == 1) {
-					wordl[i][j] = 1;
-					if (isfinal(i, j - 1) && dir == 0)
+					wordl[i][j] = 0;
+					if (isfinal(i, j - 1))
 						break;
-					y = auxY - 1;
+					j = auxY - 1;
 					dir = 2;
 				}
 //				Inicia viendo al sur y se mueve a la izquierda
 				else if (dir == 3 && wordl[i][j] == 0) {
 					wordl[i][j] = 1;
-					if (isfinal(i, j + 1) && dir == 0)
+					if (isfinal(i, j + 1))
 						break; 
-					y = auxY + 1;
+					j = auxY + 1;
 					dir = 1;
 				}
-				auxX = 0;
-				auxY = 0;
 
 			}
 			System.out.println("Yes");
@@ -174,7 +172,7 @@ public class EjercicioD {
 			for (int i = 0; i < data.length; i++) {
 				a.add(new BigDecimal(String.valueOf(data[i])));
 			}
-			int sizeWorld = Integer.valueOf(a.get(0).toString());
+			int sizeWorld = Integer.parseInt(a.get(0).toString());
 			setWordl(sizeWorld);
 			String c = convertBinary(a.get(1));
 //			System.out.println(c);
@@ -182,8 +180,8 @@ public class EjercicioD {
 //			System.out.println("Tamaño del binario :" +c.length());
 			buildWorld(c);
 //			System.out.println("Pos final" + posFinal[0] + "-" + posFinal[1]);
-			int x = Integer.valueOf(a.get(2).toString());
-			int y = Integer.valueOf(a.get(3).toString());
+			int x = Integer.parseInt(a.get(2).toString());
+			int y = Integer.parseInt(a.get(3).toString());
 			startcourse(x, y);
 		} catch (Exception e) {
 			System.out.println("Kaputt!");

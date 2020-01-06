@@ -2,6 +2,8 @@ package ejercicios;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -9,25 +11,25 @@ import java.util.ArrayList;
 public class EjercicioI {
 
 	public static void main(String[] arg) {
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));) {
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+				PrintWriter writer = new PrintWriter(new OutputStreamWriter(System.out, "ISO-8859-1"));) {
 
-			while (true) {
-				String n = reader.readLine();
-				if (n == null || n.isEmpty())
-					break;
-				String r = fibonacci(n, 2);
-				System.out.println("Valor final");
-				System.out.println("--->" + r);
+			String line = "";
+			while ((line = reader.readLine()) != null && !line.equals("")) {
+				String[] data = line.split(" ");
+				String r = fibonacci(data[0], Integer.parseInt(data[1]));
+				writer.println(r);
+				writer.flush();
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+
 		}
 	}
 
 	public static String fibonacci(String n, int j) {
 		BigDecimal bigDecimal = new BigDecimal(n);
-		long nMax = Long.valueOf(bigDecimal.toString()) % 1000000009L;
+		long nMax = Long.valueOf(bigDecimal.toString());
 		ArrayList<BigDecimal> tabla = new ArrayList<>();
 		tabla.add(BigDecimal.ZERO);
 		tabla.add(BigDecimal.ONE);
@@ -50,9 +52,8 @@ public class EjercicioI {
 			a[i] = (x % 1000000009);
 			x = 0;
 		}
-		for (int i = 1; i < a.length; i++) {
-			System.out.println("Valor ok: " + a[i]);
-
+		for (int i = 0; i < a.length; i++) {
+			System.out.println(a[i]);
 		}
 
 		return "" + a[Integer.valueOf(n)];
