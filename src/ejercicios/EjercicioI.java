@@ -17,7 +17,7 @@ public class EjercicioI {
 			String line = "";
 			while ((line = reader.readLine()) != null && !line.equals("")) {
 				String[] data = line.split(" ");
-				String r = fibonacci(data[0], Integer.parseInt(data[1]));
+				String r = fibonacci(Long.parseLong(data[0]));
 				writer.println(r);
 				writer.flush();
 			}
@@ -25,6 +25,26 @@ public class EjercicioI {
 		} catch (Exception e) {
 
 		}
+	}
+
+	static String fibonacci(long n) {
+		long h, i, j, k, aux;
+		i = 1;
+		h = i;
+		k = 0;
+		j = k;
+		while (n > 0) {
+			if (n % 2 != 0) {
+				aux = h * j;
+				j = h * i + j * k + aux;
+				i = i * k + aux;
+			}
+			aux = h * h;
+			h = 2 * h * k + aux;
+			k = k * k + aux;
+			n = n / 2;
+		}
+		return String.valueOf(j);
 	}
 
 	public static String fibonacci(String n, int j) {
